@@ -2,3 +2,4 @@ telegram:
   bot:
     username: testUserName
     token: 111222333:asddfsdggsdgsdg_aaatest
+    type: Echo

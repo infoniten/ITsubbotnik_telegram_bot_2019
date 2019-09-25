@@ -1,6 +1,7 @@
 package com.epam.telegram.configuration;
 
 import com.epam.telegram.MyAmazingTestBot;
+import com.epam.telegram.QuizBot;
 import com.epam.telegram.service.BotService;
 import com.epam.telegram.service.BotServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,11 +19,19 @@ public class BotConfig {
     private String botToken;
     @Value("${spring.profiles.active:Unknown}")
     private String activeProfile;
+    @Value("${telegram.bot.type}")
+    private String botType;
 
 
     @Bean
     public TelegramLongPollingBot TelegramLongPollingBotManager() {
-        return new MyAmazingTestBot(botName, botToken);
+        if (botType.equals("Quiz")) {
+            return new QuizBot(botName, botToken);
+        } else if (botType.equals("Echo")) {
+            return new MyAmazingTestBot(botName, botToken);
+        } else {
+            return new MyAmazingTestBot(botName, botToken);
+        }
     }
 
     @Bean
