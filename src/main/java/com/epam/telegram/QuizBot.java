@@ -11,7 +11,9 @@ import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -101,8 +103,9 @@ public class QuizBot extends TelegramLongPollingBot {
     private void sendCongratulations(UserSession userSession) {
         SendMessage message = new SendMessage().setChatId(userSession.getChatId());
 
-        message.setText("Поздравляю! Ты прошёл испытание! Подойди к стенду и получи свой приз!")
-        ;
+        message.setText("Поздравляю! Ты прошёл испытание! Подойди к стенду и получи свой приз!");
+        ReplyKeyboardRemove keyboardMarkup = new ReplyKeyboardRemove();
+        message.setReplyMarkup(keyboardMarkup);
         try {
             execute(message);
         } catch (TelegramApiException e) {
@@ -158,10 +161,10 @@ public class QuizBot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage().setChatId(userSession.getChatId());
         message.setText(userSession.getLastQuestion().getQuestion());
 
-        ReplyKeyboardMarkup markup = getAnswerButtons(userSession.getLastQuestion());
-        if (markup != null) {
-            message.setReplyMarkup(markup);
-        }
+        ReplyKeyboard markup = getAnswerButtons(userSession.getLastQuestion());
+
+        message.setReplyMarkup(markup);
+
         try {
             execute(message);
         } catch (TelegramApiException e) {
@@ -169,10 +172,10 @@ public class QuizBot extends TelegramLongPollingBot {
         }
     }
 
-    private ReplyKeyboardMarkup getAnswerButtons(Question question) {
+    private ReplyKeyboard getAnswerButtons(Question question) {
 
         if (question.getAnswerList() == null) {
-            return null;
+            return new ReplyKeyboardRemove();
         }
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboardRows = new ArrayList<>();
