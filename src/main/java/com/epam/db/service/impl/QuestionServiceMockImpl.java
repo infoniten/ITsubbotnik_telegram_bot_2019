@@ -70,7 +70,7 @@ public class QuestionServiceMockImpl implements QuestionService {
                 .builder()
                 .id(6)
                 .question("16 + 5 = ?")
-                .correctAnswer("")
+                .correctAnswer("21")
                 .answerList(Arrays.asList("21", "20", "19", "17"))
                 .build());
 

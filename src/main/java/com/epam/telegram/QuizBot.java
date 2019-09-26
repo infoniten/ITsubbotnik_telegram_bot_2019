@@ -52,17 +52,23 @@ public class QuizBot extends TelegramLongPollingBot {
                 userSession.setLastQuestion(getQuestionForUser(userSession));
                 sendQuestionForUser(userSession);
                 userSessionService.saveUserSession(userSession);
-            } else {
+            } else if (userSessionService.getUserSessionByChatId(chat_id).getCorrectAnswerSum() < 20) {
                 UserSession userSession = userSessionService.getUserSessionByChatId(chat_id);
-                if (userSession.getLastQuestion().getCorrectAnswer().equals(message_text)) {
+                if (userSession.getLastQuestion().getCorrectAnswer().toLowerCase().equals(message_text.toLowerCase())) {
                     userSession.incNumberOfCorrectAnswer();
-                    userSessionService.saveUserSession(userSession);
-                    sendCorrectOtNotAnswer(userSession.getChatId(), true);
-                    userSession.setLastQuestion(getQuestionForUser(userSession));
-                    sendQuestionForUser(userSession);
-                    userSessionService.saveUserSession(userSession);
+                    if (userSession.getCorrectAnswerSum() >= 20) {
+                        sendCongratulations(userSession);
+                    } else {
+                        userSessionService.saveUserSession(userSession);
+                        sendCorrectOtNotAnswer(userSession.getChatId(), true);
+                        sendResultForUser(userSession);
+                        userSession.setLastQuestion(getQuestionForUser(userSession));
+                        sendQuestionForUser(userSession);
+                        userSessionService.saveUserSession(userSession);
+                    }
                 } else {
                     sendCorrectOtNotAnswer(userSession.getChatId(), false);
+                    sendResultForUser(userSession);
                     userSession.setLastQuestion(getQuestionForUser(userSession));
                     sendQuestionForUser(userSession);
                     userSessionService.saveUserSession(userSession);
@@ -80,6 +86,18 @@ public class QuizBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return botToken;
+    }
+
+    private void sendCongratulations(UserSession userSession) {
+        SendMessage message = new SendMessage().setChatId(userSession.getChatId());
+
+        message.setText("Поздравляю! Ты прошёл испытание! Подойди к стенду и получи свой приз!")
+        ;
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendCorrectOtNotAnswer(Long chatId, Boolean correct) {
@@ -104,6 +122,25 @@ public class QuizBot extends TelegramLongPollingBot {
             e.printStackTrace();
         }
 
+    }
+
+    private void sendResultForUser(UserSession userSession) {
+        SendMessage message = new SendMessage().setChatId(userSession.getChatId());
+
+        message.setText(getCorrectAnswerSumString(userSession.getCorrectAnswerSum()));
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getCorrectAnswerSumString(Integer correctAnswerSum) {
+
+        return "Твой результат " +
+                correctAnswerSum +
+                "/20 баллов";
     }
 
     private void sendQuestionForUser(UserSession userSession) {
