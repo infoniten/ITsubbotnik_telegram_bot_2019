@@ -74,6 +74,77 @@ public class QuestionServiceMockImpl implements QuestionService {
                 .answerList(Arrays.asList("21", "20", "19", "17"))
                 .build());
 
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Какова доля азота в атмосфере?")
+                .correctAnswer("78%")
+                .answerList(Arrays.asList("12%", "78%", "31%", "96%"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Назовите часть речи слова «Привет»")
+                .correctAnswer("Междометие")
+                .answerList(Arrays.asList("Междометие", "Существительное", "Предлог", "Огурец"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Чему приблизительно ровно число «Пи»")
+                .correctAnswer("3,14")
+                .answerList(Arrays.asList("3,14", "3,145", "3,12", "3,41"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Сколько материков на планете Земля")
+                .correctAnswer("6")
+                .answerList(Arrays.asList("6", "5", "7", "1"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("На каком уроке проходят правило буравчика")
+                .correctAnswer("Физика")
+                .answerList(Arrays.asList("Алгебра", "Труды", "Физкультура", "Физика"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("В каком году отменили крепостное право")
+                .correctAnswer("1861")
+                .answerList(Arrays.asList("1943", "1811", "1861", "1921"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Во сколько лет умер Ленин")
+                .correctAnswer("53")
+                .answerList(Arrays.asList("33", "61", "57", "53"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("Карточка стандартной формы для записи электронной информации при помощи кодового расположения отверстий")
+                .correctAnswer("Перфокарта")
+                .answerList(Arrays.asList("Блокнот", "Пластинка", "Перфокарта", "Ключ Шмелевского"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(6)
+                .question("индийский политический и общественный деятель, один из руководителей и идеологов движения за независимость Индии от Великобритании")
+                .correctAnswer("Махатма Ганди")
+                .answerList(Arrays.asList("Имхотеб Махтанг", "Гиоргян Местов", "Махатма Ганди", "Валерий Хмарых"))
+                .build());
 
         return questions;
     }
