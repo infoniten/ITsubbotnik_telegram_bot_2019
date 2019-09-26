@@ -76,7 +76,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(7)
                 .question("Какова доля азота в атмосфере?")
                 .correctAnswer("78%")
                 .answerList(Arrays.asList("12%", "78%", "31%", "96%"))
@@ -84,7 +84,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(8)
                 .question("Назовите часть речи слова «Привет»")
                 .correctAnswer("Междометие")
                 .answerList(Arrays.asList("Междометие", "Существительное", "Предлог", "Огурец"))
@@ -92,7 +92,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(9)
                 .question("Чему приблизительно ровно число «Пи»")
                 .correctAnswer("3,14")
                 .answerList(Arrays.asList("3,14", "3,145", "3,12", "3,41"))
@@ -100,7 +100,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(10)
                 .question("Сколько материков на планете Земля")
                 .correctAnswer("6")
                 .answerList(Arrays.asList("6", "5", "7", "1"))
@@ -108,7 +108,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(11)
                 .question("На каком уроке проходят правило буравчика")
                 .correctAnswer("Физика")
                 .answerList(Arrays.asList("Алгебра", "Труды", "Физкультура", "Физика"))
@@ -116,7 +116,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(12)
                 .question("В каком году отменили крепостное право")
                 .correctAnswer("1861")
                 .answerList(Arrays.asList("1943", "1811", "1861", "1921"))
@@ -124,7 +124,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(13)
                 .question("Во сколько лет умер Ленин")
                 .correctAnswer("53")
                 .answerList(Arrays.asList("33", "61", "57", "53"))
@@ -132,7 +132,7 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(14)
                 .question("Карточка стандартной формы для записи электронной информации при помощи кодового расположения отверстий")
                 .correctAnswer("Перфокарта")
                 .answerList(Arrays.asList("Блокнот", "Пластинка", "Перфокарта", "Ключ Шмелевского"))
@@ -140,10 +140,49 @@ public class QuestionServiceMockImpl implements QuestionService {
 
         questions.add(Question
                 .builder()
-                .id(6)
+                .id(15)
                 .question("индийский политический и общественный деятель, один из руководителей и идеологов движения за независимость Индии от Великобритании")
                 .correctAnswer("Махатма Ганди")
                 .answerList(Arrays.asList("Имхотеб Махтанг", "Гиоргян Местов", "Махатма Ганди", "Валерий Хмарых"))
+                .build());
+        questions.add(Question
+                .builder()
+                .id(16)
+                .question("Еденица измерения силы тока")
+                .correctAnswer("Ампер")
+                .answerList(Arrays.asList("Грут", "Ватт", "Тор", "Ампер"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(17)
+                .question("Сатурн какая по счету планета от солнца")
+                .correctAnswer("6")
+                .answerList(Arrays.asList("6", "2", "3", "5"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(18)
+                .question("Сколько будет 0.2 км в дециметрах")
+                .correctAnswer("2000")
+                .answerList(Arrays.asList("200", "20000", "20", "2000"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(19)
+                .question("Какое число обозначается римскими цифрами LXXVII")
+                .correctAnswer("77")
+                .answerList(Arrays.asList("223", "91", "162", "77"))
+                .build());
+
+        questions.add(Question
+                .builder()
+                .id(20)
+                .question("Зеленый пигмент окрашивающий листья растений")
+                .correctAnswer("Хлорофилл")
+                .answerList(Arrays.asList("Ингалипт", "Хлорофилл", "Хлоропласт", "Пенополистирол"))
                 .build());
 
         return questions;
