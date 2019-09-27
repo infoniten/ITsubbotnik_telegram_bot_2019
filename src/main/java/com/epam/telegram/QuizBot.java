@@ -4,6 +4,7 @@ import com.epam.db.service.QuestionService;
 import com.epam.db.service.UserSessionService;
 import com.epam.db.service.impl.QuestionServiceMockImpl;
 import com.epam.db.service.impl.UserSessionServiceMockImpl;
+import com.epam.db.service.impl.XmlQuestionServiceMockImpl;
 import com.epam.telegram.entity.Question;
 import com.epam.telegram.entity.UserSession;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRem
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class QuizBot extends TelegramLongPollingBot {
     private String botName;
     private String botToken;
 
-    private QuestionService questionService = new QuestionServiceMockImpl();
+    private QuestionService questionService = new XmlQuestionServiceMockImpl();
     private UserSessionService userSessionService = new UserSessionServiceMockImpl();
 
     private String accept = "Поехали!\uD83D\uDCAA";
