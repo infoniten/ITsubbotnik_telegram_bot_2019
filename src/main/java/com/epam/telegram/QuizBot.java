@@ -53,7 +53,7 @@ public class QuizBot extends TelegramLongPollingBot {
 
             log.info("Message received: " + chat_id);
 
-            if (message_text.equals("/start")) {
+            if (message_text.equals("/start") && isNewUser(chat_id)) {
                 sendHelloForUser(chat_id);
                 log.info("New chat with user: " + chat_id);
 
@@ -90,6 +90,10 @@ public class QuizBot extends TelegramLongPollingBot {
             }
         }
 
+    }
+
+    private Boolean isNewUser(Long chatId) {
+        return userSessionService.getUserSessionByChatId(chatId) == null;
     }
 
     @Override
