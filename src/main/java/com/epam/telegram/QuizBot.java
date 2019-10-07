@@ -23,6 +23,8 @@ import java.util.List;
 @Slf4j
 public class QuizBot extends TelegramLongPollingBot {
 
+    private static final Integer POINTS_TO_WIN = 20;
+
     private String botName;
     private String botToken;
 
@@ -61,12 +63,12 @@ public class QuizBot extends TelegramLongPollingBot {
                 userSession.setLastQuestion(getQuestionForUser(userSession));
                 sendQuestionForUser(userSession);
                 userSessionService.saveUserSession(userSession);
-            } else if (userSessionService.getUserSessionByChatId(chat_id).getCorrectAnswerSum() < 20) {
+            } else if (userSessionService.getUserSessionByChatId(chat_id).getCorrectAnswerSum() < POINTS_TO_WIN) {
                 UserSession userSession = userSessionService.getUserSessionByChatId(chat_id);
                 if (userSession.getLastQuestion().getCorrectAnswer().toLowerCase().equals(message_text.toLowerCase())) {
                     log.info("user give correct answer: " + chat_id);
                     userSession.incNumberOfCorrectAnswer();
-                    if (userSession.getCorrectAnswerSum() >= 20) {
+                    if (userSession.getCorrectAnswerSum() >= POINTS_TO_WIN) {
                         log.info("user finish quiz: " + chat_id);
                         sendCongratulations(userSession);
                     } else {
@@ -158,7 +160,7 @@ public class QuizBot extends TelegramLongPollingBot {
 
         return "Твой результат " +
                 correctAnswerSum +
-                "/20 баллов";
+                "/" + POINTS_TO_WIN + " баллов";
     }
 
     private void sendQuestionForUser(UserSession userSession) {
