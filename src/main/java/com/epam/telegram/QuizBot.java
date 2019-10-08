@@ -2,8 +2,8 @@ package com.epam.telegram;
 
 import com.epam.db.service.QuestionService;
 import com.epam.db.service.UserSessionService;
-import com.epam.db.service.impl.UserSessionServiceMockImpl;
-import com.epam.xml.service.XmlQuestionServiceImpl;
+import com.epam.db.service.impl.mock.UserSessionServiceMockImpl;
+import com.epam.db.service.impl.xml.service.XmlQuestionServiceImpl;
 import com.epam.telegram.entity.Question;
 import com.epam.telegram.entity.UserSession;
 import lombok.extern.slf4j.Slf4j;

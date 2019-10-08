@@ -1,8 +1,7 @@
-package com.epam.xml.entity;
+package com.epam.db.service.impl.xml.entity;
 
 import com.epam.telegram.entity.Question;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;

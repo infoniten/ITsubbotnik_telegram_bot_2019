@@ -1,10 +1,8 @@
-package com.epam.xml.service;
+package com.epam.db.service.impl.xml.service;
 
 import com.epam.db.service.QuestionService;
-import com.epam.xml.entity.XmlQuestionsPack;
-import com.epam.xml.entity.XmlQuestion;
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.context.annotation.Primary;
+import com.epam.db.service.impl.xml.entity.XmlQuestion;
+import com.epam.db.service.impl.xml.entity.XmlQuestionsPack;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,7 +10,6 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class XmlQuestionServiceImpl implements QuestionService {

@@ -1,4 +1,4 @@
-package com.epam.db.service.impl;
+package com.epam.db.service.impl.mock;
 
 import com.epam.db.service.QuestionService;
 import com.epam.telegram.entity.Question;
