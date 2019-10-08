@@ -1,8 +1,10 @@
-package com.epam.db.service.impl;
+package com.epam.xml.service;
 
 import com.epam.db.service.QuestionService;
-import com.epam.telegram.entity.Question;
-import com.epam.telegram.entity.QuestionsPack;
+import com.epam.xml.entity.XmlQuestionsPack;
+import com.epam.xml.entity.XmlQuestion;
+import org.jvnet.hk2.annotations.Service;
+import org.springframework.context.annotation.Primary;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,30 +15,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class XmlQuestionServiceMockImpl implements QuestionService {
-    private List<Question> questionList;
+public class XmlQuestionServiceImpl implements QuestionService {
+    private List<XmlQuestion> questionList;
 
-    public XmlQuestionServiceMockImpl() {
+    public XmlQuestionServiceImpl() {
         this.questionList = initialize();
     }
 
     @Override
-    public Question getQuestionWithoutRepetition(List<Long> ids) {
+    public XmlQuestion getQuestionWithoutRepetition(List<Long> ids) {
         Random rnd = new Random(System.currentTimeMillis());
         int index = rnd.nextInt(questionList.size());
         return questionList.get(index);
     }
-
-
-    private List<Question> initialize() {
+    private List<XmlQuestion> initialize() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(Objects.requireNonNull(classLoader.getResource("questions.xml")).getFile());
+            File file = new File("questions.xml");
 
-            JAXBContext jaxbContext = JAXBContext.newInstance(QuestionsPack.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(XmlQuestionsPack.class);
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            QuestionsPack questionsPack = (QuestionsPack) jaxbUnmarshaller.unmarshal(file);
+            XmlQuestionsPack questionsPack = (XmlQuestionsPack) jaxbUnmarshaller.unmarshal(file);
             return questionsPack.getQuestionList();
         }
         catch (JAXBException | NullPointerException e){
