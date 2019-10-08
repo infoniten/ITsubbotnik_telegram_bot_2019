@@ -1,8 +1,10 @@
-package com.epam.telegram.entity;
+package com.epam.xml.entity;
 
+import com.epam.telegram.entity.Question;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,19 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 @XmlRootElement
 @Builder
-public class QuestionsPack {
-    List<Question> questionList;
+public class XmlQuestionsPack {
+    List<XmlQuestion> questionList;
 
-    public QuestionsPack(List<Question> questionList) {
+    public XmlQuestionsPack(List<XmlQuestion> questionList) {
         this.questionList = questionList;
     }
     @XmlElementWrapper(name = "answersList")
     @XmlElement(name = "element")
-    public List<Question> getQuestionList() {
+    public List<XmlQuestion> getQuestionList() {
         return questionList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
+    public void setQuestionList(List<XmlQuestion> questionList) {
         this.questionList = questionList;
     }
 
