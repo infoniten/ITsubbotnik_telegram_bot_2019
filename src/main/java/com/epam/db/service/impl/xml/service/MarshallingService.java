@@ -1,7 +1,7 @@
-package com.epam.xml.service;
+package com.epam.db.service.impl.xml.service;
 
-import com.epam.xml.entity.XmlQuestionsPack;
-import com.epam.xml.entity.XmlQuestion;
+import com.epam.db.service.impl.xml.entity.XmlQuestion;
+import com.epam.db.service.impl.xml.entity.XmlQuestionsPack;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
