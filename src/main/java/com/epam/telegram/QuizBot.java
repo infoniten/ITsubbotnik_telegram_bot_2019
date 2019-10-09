@@ -65,7 +65,7 @@ public class QuizBot extends TelegramLongPollingBot {
                 sendQuestionForUser(userSession);
                 userSessionService.saveUserSession(userSession);
 
-            } else if (!scoredTheRightAmountOfPoints(chat_id)) {
+            } else if (scoredLessThanNeed(chat_id)) {
 
                 UserSession userSession = userSessionService.getUserSessionByChatId(chat_id);
 
@@ -74,7 +74,7 @@ public class QuizBot extends TelegramLongPollingBot {
                     log.info("user give correct answer: " + chat_id);
                     userSession.incNumberOfCorrectAnswer();
 
-                    if (scoredTheRightAmountOfPoints(chat_id)) {
+                    if (!scoredLessThanNeed(chat_id)) {
 
                         log.info("user finish quiz: " + chat_id);
                         sendCongratulations(userSession);
@@ -107,7 +107,7 @@ public class QuizBot extends TelegramLongPollingBot {
         userSessionService.saveUserSession(userSession);
     }
 
-    private Boolean scoredTheRightAmountOfPoints(Long chat_id) {
+    private Boolean scoredLessThanNeed(Long chat_id) {
         return userSessionService.getUserSessionByChatId(chat_id).getCorrectAnswerSum() < POINTS_TO_WIN;
     }
 
