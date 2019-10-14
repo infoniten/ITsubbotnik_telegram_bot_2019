@@ -2,12 +2,14 @@ package com.epam.telegram.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Question {
     protected int id;
     protected String question;

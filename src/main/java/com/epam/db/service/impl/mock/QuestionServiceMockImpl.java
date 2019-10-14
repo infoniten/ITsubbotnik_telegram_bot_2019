@@ -3,10 +3,7 @@ package com.epam.db.service.impl.mock;
 import com.epam.db.service.QuestionService;
 import com.epam.telegram.entity.Question;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class QuestionServiceMockImpl implements QuestionService {
     private List<Question> questionList;
@@ -16,7 +13,7 @@ public class QuestionServiceMockImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestionWithoutRepetition(List<Integer> ids) {
+    public Question getQuestionWithoutRepetition(HashSet<Question> ids) {
         Random rnd = new Random(System.currentTimeMillis());
         int index = rnd.nextInt(questionList.size());
         return questionList.get(index);

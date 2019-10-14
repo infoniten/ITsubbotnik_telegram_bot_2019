@@ -2,8 +2,8 @@ package com.epam.db.service;
 
 import com.epam.telegram.entity.Question;
 
-import java.util.List;
+import java.util.HashSet;
 
 public interface QuestionService {
-    Question getQuestionWithoutRepetition(List<Integer> ids);
+    Question getQuestionWithoutRepetition(HashSet<Question> ids);
 }

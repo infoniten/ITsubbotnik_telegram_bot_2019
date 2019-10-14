@@ -3,6 +3,7 @@ package com.epam.db.service.impl.xml.service;
 import com.epam.db.service.QuestionService;
 import com.epam.db.service.impl.xml.entity.XmlQuestion;
 import com.epam.db.service.impl.xml.entity.XmlQuestionsPack;
+import com.epam.telegram.entity.Question;
 import org.apache.commons.math3.random.RandomDataGenerator;
 
 import javax.xml.bind.JAXBContext;
@@ -10,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class XmlQuestionServiceImpl implements QuestionService {
@@ -20,14 +22,16 @@ public class XmlQuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public XmlQuestion getQuestionWithoutRepetition(List<Integer> ids) {
-        if (ids.size() == questionList.size()) {
+    public XmlQuestion getQuestionWithoutRepetition(HashSet<Question> ids) {
+        if (ids.size() >= questionList.size()) {
             return null;
         }
-        RandomDataGenerator rnd = new RandomDataGenerator();
-        Integer index = rnd.nextInt(0, questionList.size());
-        for (; ids.contains(index); index = rnd.nextInt(0, questionList.size() - 1)) ;
-        return questionList.get(index);
+
+        if (ids.size() < questionList.size() / 2) {
+            return getQuestionWithRandomIndexGeneration(ids);
+        } else {
+            return getQuestionWithRandomIndexGeneration(ids);
+        }
     }
     private List<XmlQuestion> initialize() {
         try {
@@ -44,5 +48,22 @@ public class XmlQuestionServiceImpl implements QuestionService {
             System.out.println("Error init xml file " + e);
         }
         return new ArrayList<>();
+    }
+
+    private XmlQuestion getQuestionWithRandomIndexGeneration(HashSet<Question> ids) {
+        RandomDataGenerator rnd = new RandomDataGenerator();
+        for (int index = getRndInt(rnd); ; index = getRndInt(rnd)) {
+            if (!ids.contains(questionList.get(index))) {
+                return questionList.get(index);
+            }
+        }
+    }
+
+    private int getRndInt(RandomDataGenerator rnd) {
+        return rnd.nextInt(0, questionList.size() - 1);
+    }
+
+    private XmlQuestion getQuestionWithSmartIndexGeneration(HashSet<Question> ids) {
+        return null;
     }
 }
