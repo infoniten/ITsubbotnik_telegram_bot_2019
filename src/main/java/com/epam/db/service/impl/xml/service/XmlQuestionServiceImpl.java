@@ -13,6 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class XmlQuestionServiceImpl implements QuestionService {
     private List<XmlQuestion> questionList;
@@ -30,12 +31,11 @@ public class XmlQuestionServiceImpl implements QuestionService {
         if (ids.size() < questionList.size() / 2) {
             return getQuestionWithRandomIndexGeneration(ids);
         } else {
-            return getQuestionWithRandomIndexGeneration(ids);
+            return getQuestionWithSmartIndexGeneration(ids);
         }
     }
     private List<XmlQuestion> initialize() {
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
             File file = new File("questions.xml");
 
             JAXBContext jaxbContext = JAXBContext.newInstance(XmlQuestionsPack.class);
@@ -64,6 +64,13 @@ public class XmlQuestionServiceImpl implements QuestionService {
     }
 
     private XmlQuestion getQuestionWithSmartIndexGeneration(HashSet<Question> ids) {
-        return null;
+        List<XmlQuestion> notSendQuestions = questionList
+                .stream()
+                .filter(xmlQuestion -> !ids.contains(xmlQuestion))
+                .collect(Collectors.toList());
+
+        RandomDataGenerator rnd = new RandomDataGenerator();
+
+        return notSendQuestions.get(rnd.nextInt(0, notSendQuestions.size() - 1));
     }
 }
