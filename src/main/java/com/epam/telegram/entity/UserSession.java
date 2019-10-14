@@ -12,7 +12,7 @@ public class UserSession {
     @Getter
     private Integer correctAnswerSum;
     @Getter
-    private List<Long> answeredQuiz;
+    private List<Integer> answeredQuiz;
     @Getter
     @Setter
     private Question lastQuestion;
@@ -27,8 +27,13 @@ public class UserSession {
         this.correctAnswerSum += 1;
     }
 
-    public void addIdAnswer(Long id) {
+    public void addIdAnswer(Integer id) {
         answeredQuiz.add(id);
+    }
+
+    public void setLastQuestion(Question question) {
+        addIdAnswer(question.id);
+        this.lastQuestion = question;
     }
 }
 

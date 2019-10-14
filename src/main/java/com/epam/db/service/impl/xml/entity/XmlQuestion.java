@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class XmlQuestion extends Question {
     @Builder(builderMethodName = "childBuilder")
-    public XmlQuestion(long id, String question, List<String> answerList, String correctAnswer) {
+    public XmlQuestion(int id, String question, List<String> answerList, String correctAnswer) {
         super(id, question, answerList, correctAnswer);
     }
 

@@ -3,6 +3,7 @@ package com.epam.db.service.impl.xml.service;
 import com.epam.db.service.QuestionService;
 import com.epam.db.service.impl.xml.entity.XmlQuestion;
 import com.epam.db.service.impl.xml.entity.XmlQuestionsPack;
+import org.apache.commons.math3.random.RandomDataGenerator;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,7 +11,6 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class XmlQuestionServiceImpl implements QuestionService {
     private List<XmlQuestion> questionList;
@@ -20,9 +20,13 @@ public class XmlQuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public XmlQuestion getQuestionWithoutRepetition(List<Long> ids) {
-        Random rnd = new Random(System.currentTimeMillis());
-        int index = rnd.nextInt(questionList.size());
+    public XmlQuestion getQuestionWithoutRepetition(List<Integer> ids) {
+        if (ids.size() == questionList.size()) {
+            return null;
+        }
+        RandomDataGenerator rnd = new RandomDataGenerator();
+        Integer index = rnd.nextInt(0, questionList.size());
+        for (; ids.contains(index); index = rnd.nextInt(0, questionList.size() - 1)) ;
         return questionList.get(index);
     }
     private List<XmlQuestion> initialize() {

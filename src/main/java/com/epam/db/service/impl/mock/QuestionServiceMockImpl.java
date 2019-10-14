@@ -16,7 +16,7 @@ public class QuestionServiceMockImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestionWithoutRepetition(List<Long> ids) {
+    public Question getQuestionWithoutRepetition(List<Integer> ids) {
         Random rnd = new Random(System.currentTimeMillis());
         int index = rnd.nextInt(questionList.size());
         return questionList.get(index);
