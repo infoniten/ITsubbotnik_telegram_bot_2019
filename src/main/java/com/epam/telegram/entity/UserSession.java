@@ -1,10 +1,8 @@
 package com.epam.telegram.entity;
 
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class UserSession {
     @Getter
@@ -12,23 +10,29 @@ public class UserSession {
     @Getter
     private Integer correctAnswerSum;
     @Getter
-    private List<Long> answeredQuiz;
+    private HashSet<Question> answeredQuiz;
     @Getter
-    @Setter
     private Question lastQuestion;
 
     public UserSession(long chatId) {
         this.chatId = chatId;
         this.correctAnswerSum = 0;
-        this.answeredQuiz = new ArrayList<>();
+        this.answeredQuiz = new HashSet<>();
     }
 
     public void incNumberOfCorrectAnswer() {
         this.correctAnswerSum += 1;
     }
 
-    public void addIdAnswer(Long id) {
-        answeredQuiz.add(id);
+    private void addIdAnswer(Question question) {
+        answeredQuiz.add(question);
+    }
+
+    public void setLastQuestion(Question question) {
+        if (question != null) {
+            addIdAnswer(question);
+        }
+        this.lastQuestion = question;
     }
 }
 
