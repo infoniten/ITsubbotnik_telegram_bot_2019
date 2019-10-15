@@ -24,12 +24,14 @@ public class UserSession {
         this.correctAnswerSum += 1;
     }
 
-    public void addIdAnswer(Question question) {
+    private void addIdAnswer(Question question) {
         answeredQuiz.add(question);
     }
 
     public void setLastQuestion(Question question) {
-        addIdAnswer(question);
+        if (question != null) {
+            addIdAnswer(question);
+        }
         this.lastQuestion = question;
     }
 }

@@ -65,7 +65,7 @@ public class QuizBot extends TelegramLongPollingBot {
                 sendQuestionForUser(userSession);
                 userSessionService.saveUserSession(userSession);
 
-            } else if (scoredLessThanNeed(chat_id)) {
+            } else if (scoredLessThanNeed(chat_id) && LastQuestionNotNull(chat_id)) {
 
                 UserSession userSession = userSessionService.getUserSessionByChatId(chat_id);
 
@@ -111,6 +111,10 @@ public class QuizBot extends TelegramLongPollingBot {
         return userSessionService.getUserSessionByChatId(chat_id).getCorrectAnswerSum() < POINTS_TO_WIN;
     }
 
+    private Boolean LastQuestionNotNull(Long chat_id) {
+        return userSessionService.getUserSessionByChatId(chat_id).getLastQuestion() != null;
+    }
+
     private Boolean isNewUser(Long chatId) {
         return userSessionService.getUserSessionByChatId(chatId) == null;
     }
@@ -149,6 +153,12 @@ public class QuizBot extends TelegramLongPollingBot {
     private String getHelloMessage(String userName) {
         return "Привет, " + userName + "! Мы рады приветствовать тебя в нашем квизе :) Тебе предстоит ответить " +
                 "на несколько простых вопросов и в конце тебя ждёт награда! Ты готов?";
+    }
+
+    private String getLooserMessage() {
+
+        return "Для тебя закончились вопросы и ты не смог пройти тест :C Пройди в IT-исповедальню " +
+                "и отпусти свои грехи";
     }
 
     private String getCorrectAnswerSumString(Integer correctAnswerSum) {
@@ -196,7 +206,9 @@ public class QuizBot extends TelegramLongPollingBot {
 
     private void sendQuestionForUser(UserSession userSession) {
         SendMessage message = new SendMessage().setChatId(userSession.getChatId());
-        message.setText(userSession.getLastQuestion().getQuestion());
+        message.setText(
+                userSession.getLastQuestion() == null ? getLooserMessage() : userSession.getLastQuestion().getQuestion()
+        );
 
         ReplyKeyboard markup = getAnswerButtons(userSession.getLastQuestion());
 
@@ -211,7 +223,7 @@ public class QuizBot extends TelegramLongPollingBot {
 
     private ReplyKeyboard getAnswerButtons(Question question) {
 
-        if (question.getAnswerList() == null) {
+        if (question == null || question.getAnswerList() == null) {
             return new ReplyKeyboardRemove();
         }
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
