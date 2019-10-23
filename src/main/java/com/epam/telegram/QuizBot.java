@@ -156,9 +156,8 @@ public class QuizBot extends TelegramLongPollingBot {
     }
 
     private String getLooserMessage() {
-
-        return "Для тебя закончились вопросы и ты не смог пройти тест :C Пройди в IT-исповедальню " +
-                "и отпусти свои грехи";
+        return "Для тебя закончились вопросы и ты не смог пройти тест :C Подходи к стенду, " +
+                "ты всё равно заслужил приз!";
     }
 
     private String getCorrectAnswerSumString(Integer correctAnswerSum) {
