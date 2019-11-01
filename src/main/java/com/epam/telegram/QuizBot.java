@@ -227,12 +227,14 @@ public class QuizBot extends TelegramLongPollingBot {
         }
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboardRows = new ArrayList<>();
-        KeyboardRow keyboardRow = new KeyboardRow();
+
         for (String answer :
                 question.getAnswerList()) {
+            KeyboardRow keyboardRow = new KeyboardRow();
             keyboardRow.add(answer);
+            keyboardRows.add(keyboardRow);
         }
-        keyboardRows.add(keyboardRow);
+
         keyboardMarkup.setKeyboard(keyboardRows);
 
         return keyboardMarkup;
