@@ -24,7 +24,7 @@ public class XmlQuestionServiceImpl implements QuestionService {
 
     @Override
     public XmlQuestion getQuestionWithoutRepetition(HashSet<Question> ids) {
-        if (ids.size() >= questionList.size()) {
+        if (ids.size() >= questionList.size() - 1) {
             return null;
         }
 
